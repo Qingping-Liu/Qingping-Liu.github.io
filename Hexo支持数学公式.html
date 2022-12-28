@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -19,22 +19,26 @@
 
 <script id="hexo-configurations">
     var NexT = window.NexT || {};
-    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
   </script>
 
   <meta name="description" content="前言 作为水利工程系的一名学生，免不了常常会碰到数学公式。常用的Markdown编辑器是支持公式的输入的，但hexo默认配置在渲染网页时并不会识别出这些公式，并把他们渲染出来。要在网页渲染时，把Markdown的公式自动转换成我们熟悉的公式的表达方式，需要对hexo的默认设置作出一些调整。作者在经过了各种尝试以后，终于找到了问题的解决方案。值得注意的是，这里我选用的next的主题作为我博客的主题。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo支持数学公式">
-<meta property="og:url" content="http://example.com/2022/11/22/Hexo%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:url" content="http://example.com/Hexo%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F.html">
+<meta property="og:site_name" content="BNU-LQP">
 <meta property="og:description" content="前言 作为水利工程系的一名学生，免不了常常会碰到数学公式。常用的Markdown编辑器是支持公式的输入的，但hexo默认配置在渲染网页时并不会识别出这些公式，并把他们渲染出来。要在网页渲染时，把Markdown的公式自动转换成我们熟悉的公式的表达方式，需要对hexo的默认设置作出一些调整。作者在经过了各种尝试以后，终于找到了问题的解决方案。值得注意的是，这里我选用的next的主题作为我博客的主题。">
-<meta property="og:locale" content="en_US">
+<meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-11-22T15:02:00.000Z">
-<meta property="article:modified_time" content="2022-11-25T14:49:30.717Z">
-<meta property="article:author" content="John Doe">
+<meta property="article:modified_time" content="2022-12-28T07:30:55.377Z">
+<meta property="article:author" content="Qingping Liu">
+<meta property="article:tag" content="Hexo框架">
+<meta property="article:tag" content="网站搭建">
+<meta property="article:tag" content="Markdown">
+<meta property="article:tag" content="数学公式">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2022/11/22/Hexo%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
+<link rel="canonical" href="http://example.com/Hexo%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F.html">
 
 
 <script id="page-configurations">
@@ -43,11 +47,11 @@
     sidebar: "",
     isHome : false,
     isPost : true,
-    lang   : 'en'
+    lang   : 'zh-CN'
   };
 </script>
 
-  <title>Hexo支持数学公式 | Hexo</title>
+  <title>Hexo支持数学公式 | BNU-LQP</title>
   
 
 
@@ -199,7 +203,7 @@ mjx-container[display="true"] + br {
     <header class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-container">
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -210,7 +214,7 @@ mjx-container[display="true"] + br {
 
     <a href="/" class="brand" rel="start">
       <span class="logo-line-before"><i></i></span>
-      <h1 class="site-title">Hexo</h1>
+      <h1 class="site-title">BNU-LQP</h1>
       <span class="logo-line-after"><i></i></span>
     </a>
   </div>
@@ -229,12 +233,12 @@ mjx-container[display="true"] + br {
   <ul id="menu" class="main-menu menu">
         <li class="menu-item menu-item-home">
 
-    <a href="/" rel="section">Home</a>
+    <a href="/" rel="section">首页</a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">Archives</a>
+    <a href="/archives/" rel="section">文档</a>
 
   </li>
         <li class="menu-item menu-item-academy">
@@ -258,7 +262,7 @@ mjx-container[display="true"] + br {
 
   </li>
       <li class="menu-item menu-item-search">
-        <a role="button" class="popup-trigger">Search
+        <a role="button" class="popup-trigger">search
         </a>
       </li>
   </ul>
@@ -274,7 +278,7 @@ mjx-container[display="true"] + br {
   </span>
   <div class="search-input-container">
     <input autocomplete="off" autocapitalize="off"
-           placeholder="Searching..." spellcheck="false"
+           placeholder="搜索..." spellcheck="false"
            type="search" class="search-input">
   </div>
   <span class="popup-btn-close">
@@ -313,17 +317,17 @@ mjx-container[display="true"] + br {
     
   
   
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/22/Hexo%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/">
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/Hexo%E6%94%AF%E6%8C%81%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/qingping_liu.jpg">
-      <meta itemprop="name" content="John Doe">
-      <meta itemprop="description" content="">
+      <meta itemprop="name" content="Qingping Liu">
+      <meta itemprop="description" content="涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="BNU-LQP">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -335,16 +339,16 @@ mjx-container[display="true"] + br {
               <span class="post-meta-item-icon">
                 <i class="far fa-calendar"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
 
-              <time title="Created: 2022-11-22 23:02:00" itemprop="dateCreated datePublished" datetime="2022-11-22T23:02:00+08:00">2022-11-22</time>
+              <time title="创建时间：2022-11-22 23:02:00" itemprop="dateCreated datePublished" datetime="2022-11-22T23:02:00+08:00">2022-11-22</time>
             </span>
               <span class="post-meta-item">
                 <span class="post-meta-item-icon">
                   <i class="far fa-calendar-check"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2022-11-25 22:49:30" itemprop="dateModified" datetime="2022-11-25T22:49:30+08:00">2022-11-25</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-28 15:30:55" itemprop="dateModified" datetime="2022-12-28T15:30:55+08:00">2022-12-28</time>
               </span>
 
           
@@ -583,6 +587,12 @@ true 后，则所有页面匀加载mathjax ，公式可以正常显示。</p>
     
 
       <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Hexo%E6%A1%86%E6%9E%B6/" rel="tag"># Hexo框架</a>
+              <a href="/tags/%E7%BD%91%E7%AB%99%E6%90%AD%E5%BB%BA/" rel="tag"># 网站搭建</a>
+              <a href="/tags/Markdown/" rel="tag"># Markdown</a>
+              <a href="/tags/%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F/" rel="tag"># 数学公式</a>
+          </div>
 
         
 
@@ -590,11 +600,11 @@ true 后，则所有页面匀加载mathjax ，公式可以正常显示。</p>
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2022/11/22/hello-world/" rel="prev" title="Hello World">
-      <i class="fa fa-chevron-left"></i> Hello World
+    <a href="/Man-Kendall%E8%B6%8B%E5%8A%BF%E6%A3%80%E9%AA%8C.html" rel="prev" title="使用Hexo搭建博客">
+      <i class="fa fa-chevron-left"></i> 使用Hexo搭建博客
     </a></div>
       <div class="post-nav-item">
-    <a href="/2022/11/22/GRACE%E9%87%8D%E5%8A%9B%E5%8D%AB%E6%98%9F%E6%95%B0%E6%8D%AE%E4%BB%8B%E7%BB%8D/" rel="next" title="GRACE重力卫星介绍">
+    <a href="/GRACE%E9%87%8D%E5%8A%9B%E5%8D%AB%E6%98%9F%E6%95%B0%E6%8D%AE%E4%BB%8B%E7%BB%8D.html" rel="next" title="GRACE重力卫星介绍">
       GRACE重力卫星介绍 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
@@ -646,10 +656,10 @@ true 后，则所有页面匀加载mathjax ，公式可以正常显示。</p>
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
@@ -661,19 +671,23 @@ true 后，则所有页面匀加载mathjax ，公式可以正常显示。</p>
 
       <div class="site-overview-wrap sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <img class="site-author-image" itemprop="image" alt="John Doe"
+    <img class="site-author-image" itemprop="image" alt="Qingping Liu"
       src="/images/qingping_liu.jpg">
-  <p class="site-author-name" itemprop="name">John Doe</p>
-  <div class="site-description" itemprop="description"></div>
+  <p class="site-author-name" itemprop="name">Qingping Liu</p>
+  <div class="site-description" itemprop="description">涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等</div>
 </div>
 <div class="site-state-wrap motion-element">
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">6</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-count">7</span>
+          <span class="site-state-item-name">文章</span>
         </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span>
       </div>
   </nav>
 </div>
@@ -720,12 +734,12 @@ true 后，则所有页面匀加载mathjax ，公式可以正常显示。</p>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">Qingping Liu</span>
 </div>
   <div class="powered-by">
 
-    <!--Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
-    -->地址: Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">北京师范大学</a>新街口外大街19号        邮编：100875
+    <!--<a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+    -->地址: <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">北京师范大学</a>新街口外大街19号        邮编：100875
     
   </div>
 
