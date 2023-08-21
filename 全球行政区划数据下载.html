@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next1.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next1.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next1.png">
+  <link rel="mask-icon" href="/images/logo1.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-circle.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="数据介绍 联合国粮食和农业组织（Food agriculture organization of the United Nations, FAO）发布的全球行政区数据（The Global Administrative Unit Layers, GAUL）是针对国家行政级别、一级行政级别和二级行政级别建立的一套全球地理空间数据。该数据的制作流程为：  收集最可靠的数据来源 验证地理特">
+<meta property="og:type" content="article">
+<meta property="og:title" content="全球行政区划（GAUL）数据介绍">
+<meta property="og:url" content="http://example.com/%E5%85%A8%E7%90%83%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD.html">
+<meta property="og:site_name" content="BNU-LQP">
+<meta property="og:description" content="数据介绍 联合国粮食和农业组织（Food agriculture organization of the United Nations, FAO）发布的全球行政区数据（The Global Administrative Unit Layers, GAUL）是针对国家行政级别、一级行政级别和二级行政级别建立的一套全球地理空间数据。该数据的制作流程为：  收集最可靠的数据来源 验证地理特">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-04-21T15:02:00.000Z">
+<meta property="article:modified_time" content="2023-04-21T15:03:42.647Z">
+<meta property="article:author" content="Qingping Liu">
+<meta property="article:tag" content="全球行政区划">
+<meta property="article:tag" content="GAUL">
+<meta property="article:tag" content="FAO">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://example.com/%E5%85%A8%E7%90%83%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>全球行政区划（GAUL）数据介绍 | BNU-LQP</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BNU-LQP</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">文档</a>
+
+  </li>
+        <li class="menu-item menu-item-academy">
+
+    <a href="/academy/" rel="section">学术前沿</a>
+
+  </li>
+        <li class="menu-item menu-item-datanavi">
+
+    <a href="/dataNavi/" rel="section">数据导航</a>
+
+  </li>
+        <li class="menu-item menu-item-campus">
+
+    <a href="/campus/" rel="section">校园生活</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Qingping-Liu" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E5%85%A8%E7%90%83%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/qingping_liu.jpg">
+      <meta itemprop="name" content="Qingping Liu">
+      <meta itemprop="description" content="涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BNU-LQP">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          全球行政区划（GAUL）数据介绍
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-04-21 23:02:00 / 修改时间：23:03:42" itemprop="dateCreated datePublished" datetime="2023-04-21T23:02:00+08:00">2023-04-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="数据介绍">数据介绍</h1>
+<p>联合国粮食和农业组织（Food agriculture organization of the United
+Nations, FAO）发布的全球行政区数据（The Global Administrative Unit
+Layers,
+GAUL）是针对国家行政级别、一级行政级别和二级行政级别建立的一套全球地理空间数据。该数据的制作流程为：</p>
+<ul>
+<li>收集最可靠的数据来源</li>
+<li>验证地理特征</li>
+<li>由联合国单位（UNCS）统一制图</li>
+</ul>
+<p>由于GAUL是全球范围内的地理行政区划数据，针对有领土纠纷的地区，UNCS的方法是在维护国家领土完整性的前提下做进一步的处理（具体可参考TechnicalaspectsGAUL2015.pdf
+和
+G2015_DisputedAreas.dbf这两份说明）。因此,GAUL被认为是最可靠的全球行政区划数据，该数据集为全球行政区数据的标准化做出了巨大的贡献。</p>
+<h1 id="数据预览和下载">数据预览和下载</h1>
+<p>GAUL数据集在下载前，需要进行简单的预览以确保数据的可靠性和可用性。而FAO发布的GAUL数据集提供了多种数据预览的方式。</p>
+<h2 id="fao官网预览">FAO官网预览</h2>
+<p>进入<a
+target="_blank" rel="noopener" href="https://data.apps.fao.org/map/catalog/srv/eng/catalog.search#/home">FAO网站地图目录</a>，搜索GAUL数据集，弹出以下结果：</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/%E5%B1%8F%E5%B9%95%E6%88%AA%E5%9B%BE%202023-04-21%20221843.png" /></p>
+<p>点击<code>Global Administrative Unit Layers (GAUL)</code>，即可获取到全球行政区划的元数据信息：</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421222312.png" /></p>
+<p>鼠标往下滑，即可看到数据许可、声明、文件介绍、不同级别的全球行政区划等信息。</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421222622.png" /></p>
+<p>点击<code>add to map</code>按钮，使用官方地图浏览器查看数据，这里我们将Level1级别数据加载官网：</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421222950.png" /></p>
+<p>点击每一个矢量就可以弹出其具体的信息：</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421223146.png" /></p>
+<h2 id="网络地图服务web-map-server-wms">网络地图服务（Web Map Server,
+WMS）</h2>
+<p>除了利用官网提供的在线预览等方式以外，该数据集也支持WMS,我们可以根据网站上提供的WMS地址用ArcGIS或QGIS（开源免费）来进行查看，不过此时仍然不能直接下载矢量数据。</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421223656.png" /></p>
+<p>我们根据其提供的WMS地址，加载到ArcGIS中：</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421224057.png" /></p>
+<p>选定要预览的图层后，耐心等待1分钟后，即可得到全球行政区分布情况：</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421224401.png" /></p>
+<h2 id="源数据下载">源数据下载</h2>
+<h3 id="网络要素服务web-feature-server-wfs">网络要素服务（Web Feature
+Server, WFS）</h3>
+<p>上述两种方式都只能预览全球的空间分布，并不能对数据进行编辑、更新等服务。使用WFS服务，利用QGIS（ArcGIS也行），就可以将获取到的WFS地址加载到本地服务器中，不过QGIS有一个逆天的功能，就是可以把该数据导出成矢量数据，从而实现曲线救国的目的。</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421225105.png" /></p>
+<p>在导出时，需要注意导出文件格式为矢量数据格式，导出文件的大地参考系为WGS84地理坐标系（默认是网页端标准的墨卡托投影——Pseudo-Mercator）。</p>
+<p><img
+src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230421225301.png" /></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%85%A8%E7%90%83%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92/" rel="tag"># 全球行政区划</a>
+              <a href="/tags/GAUL/" rel="tag"># GAUL</a>
+              <a href="/tags/FAO/" rel="tag"># FAO</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E6%96%87%E7%AB%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E6%92%B0%E5%86%99%E4%B8%80%E4%B8%AA%E5%A5%BD%E7%9A%84Introduction.html" rel="prev" title="研究型论文如何撰写一个好的Introduction">
+      <i class="fa fa-chevron-left"></i> 研究型论文如何撰写一个好的Introduction
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/How%20to%20write%20an%20effective%20introduction.html" rel="next" title="Lecture | How to write an effective introduction in a research paper">
+      Lecture | How to write an effective introduction in a research paper <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">数据介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E9%A2%84%E8%A7%88%E5%92%8C%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.</span> <span class="nav-text">数据预览和下载</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#fao%E5%AE%98%E7%BD%91%E9%A2%84%E8%A7%88"><span class="nav-number">2.1.</span> <span class="nav-text">FAO官网预览</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E5%9C%B0%E5%9B%BE%E6%9C%8D%E5%8A%A1web-map-server-wms"><span class="nav-number">2.2.</span> <span class="nav-text">网络地图服务（Web Map Server,
+WMS）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%BA%90%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD"><span class="nav-number">2.3.</span> <span class="nav-text">源数据下载</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BD%91%E7%BB%9C%E8%A6%81%E7%B4%A0%E6%9C%8D%E5%8A%A1web-feature-server-wfs"><span class="nav-number">2.3.1.</span> <span class="nav-text">网络要素服务（Web Feature
+Server, WFS）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingping Liu"
+      src="/images/qingping_liu.jpg">
+  <p class="site-author-name" itemprop="name">Qingping Liu</p>
+  <div class="site-description" itemprop="description">涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Qingping-Liu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Qingping-Liu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/qingpingliu9" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;qingpingliu9" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/QingpingLiu@mail.bnu.edu.cn" title="E-Mail → QingpingLiu@mail.bnu.edu.cn"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/28468952" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;28468952" rel="noopener" target="_blank"><i class="fa fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/28468952" title="Youtube → https:&#x2F;&#x2F;space.bilibili.com&#x2F;28468952" rel="noopener" target="_blank"><i class="fa fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingping Liu</span>
+</div>
+  <div class="powered-by">
+
+    <!--<a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+    -->地址: <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">北京师范大学</a>新街口外大街19号        邮编：100875
+    
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+
+  
+
+</body>
+</html>

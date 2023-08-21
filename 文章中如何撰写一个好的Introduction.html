@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next1.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next1.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next1.png">
+  <link rel="mask-icon" href="/images/logo1.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-circle.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 研究型论文中，引言（Introduction）是写在文章开头的部分，包含该篇文章的研究背景、研究意义、创新点等信息，是读者最先接受到的部分。如果说摘要（Abstract）是文章的精华，那么引言就是文章的核心，直接揭示了本研究的研究意义（Significance）和研究动机（Motivation）。相对于摘要而言，引言的字数和格式上没有特别严格的限制，但其内容要在对应的选题上更加精准和明确(">
+<meta property="og:type" content="article">
+<meta property="og:title" content="研究型论文如何撰写一个好的Introduction">
+<meta property="og:url" content="http://example.com/%E6%96%87%E7%AB%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E6%92%B0%E5%86%99%E4%B8%80%E4%B8%AA%E5%A5%BD%E7%9A%84Introduction.html">
+<meta property="og:site_name" content="BNU-LQP">
+<meta property="og:description" content="前言 研究型论文中，引言（Introduction）是写在文章开头的部分，包含该篇文章的研究背景、研究意义、创新点等信息，是读者最先接受到的部分。如果说摘要（Abstract）是文章的精华，那么引言就是文章的核心，直接揭示了本研究的研究意义（Significance）和研究动机（Motivation）。相对于摘要而言，引言的字数和格式上没有特别严格的限制，但其内容要在对应的选题上更加精准和明确(">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/Introduction%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.drawio.png#pic_center">
+<meta property="article:published_time" content="2023-04-13T02:30:00.000Z">
+<meta property="article:modified_time" content="2023-04-17T11:22:57.864Z">
+<meta property="article:author" content="Qingping Liu">
+<meta property="article:tag" content="Introduction">
+<meta property="article:tag" content="论文写作">
+<meta property="article:tag" content="写作结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/Introduction%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.drawio.png#pic_center">
+
+<link rel="canonical" href="http://example.com/%E6%96%87%E7%AB%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E6%92%B0%E5%86%99%E4%B8%80%E4%B8%AA%E5%A5%BD%E7%9A%84Introduction.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>研究型论文如何撰写一个好的Introduction | BNU-LQP</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BNU-LQP</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">文档</a>
+
+  </li>
+        <li class="menu-item menu-item-academy">
+
+    <a href="/academy/" rel="section">学术前沿</a>
+
+  </li>
+        <li class="menu-item menu-item-datanavi">
+
+    <a href="/dataNavi/" rel="section">数据导航</a>
+
+  </li>
+        <li class="menu-item menu-item-campus">
+
+    <a href="/campus/" rel="section">校园生活</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Qingping-Liu" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E6%96%87%E7%AB%A0%E4%B8%AD%E5%A6%82%E4%BD%95%E6%92%B0%E5%86%99%E4%B8%80%E4%B8%AA%E5%A5%BD%E7%9A%84Introduction.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/qingping_liu.jpg">
+      <meta itemprop="name" content="Qingping Liu">
+      <meta itemprop="description" content="涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BNU-LQP">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          研究型论文如何撰写一个好的Introduction
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-04-13 10:30:00" itemprop="dateCreated datePublished" datetime="2023-04-13T10:30:00+08:00">2023-04-13</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-04-17 19:22:57" itemprop="dateModified" datetime="2023-04-17T19:22:57+08:00">2023-04-17</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言">前言</h1>
+<p>研究型论文中，引言（Introduction）是写在文章开头的部分，包含该篇文章的<strong>研究背景、研究意义、创新点</strong>等信息，是读者最先接受到的部分。如果说<strong>摘要（Abstract）是文章的精华，那么引言就是文章的核心，直接揭示了本研究的研究意义（Significance）和研究动机（Motivation）</strong>。相对于摘要而言，引言的字数和格式上没有特别严格的限制，但其内容要在对应的选题上更加精准和明确(to
+be concise and to the
+point)。通常而言，引言被视为是全文最难写的部分，<strong>充分体现了作者的研究水平和idea的价值</strong>，因此，也<strong>是编辑、审稿人评判文章水平的重要依据</strong>。为了更好的帮助大家迅速掌握Introudction的写作技巧，接下来作者用自身的案例——以GRACE重力卫星监测华北平原地下水干旱问题，来逐一拆解分析SCI论文中Introduction的写作思路和技巧，让您也能轻松写出精彩漂亮的Introduction。</p>
+<h1 id="introduction的写作结构">Introduction的写作结构</h1>
+<p>一般而言，Introduction占文章篇幅的10%左右，也就一篇6000字的文章，Introduction写600字左右为宜。其主要的作用是向读者系统的介绍研究动机和研究内容，而研究方法和研究结果可以完全忽略。一个完整的Introduction应回答以下几个方面的问题：</p>
+<ul>
+<li><strong>本研究的背景、意义是什么？</strong></li>
+<li><strong>该问题国内外的研究成果有哪些？研究进展到那一步了？</strong></li>
+<li><strong>目前的研究在哪些方面还存在不足或空白之处？</strong></li>
+<li><strong>根据自己的研究所取得的成果，指出上述不足之处如何填补？</strong></li>
+<li><strong>本研究的主要研究目标和研究内容是什么？</strong></li>
+</ul>
+<p>并且在写作上，要求内容简洁明了、逻辑性强，具有层层递进的关系，一篇好的Introduction就是去<strong>建立一个完整的逻辑体系</strong>，上一句话为下一句话服务，从而引导读者一步步走入作者的逻辑之中，达到完美的闭环。以下为Introduction的思维导图：</p>
+<p><img src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/Introduction%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE.drawio.png#pic_center"></p>
+<h1 id="introduction的写作实例">Introduction的写作实例</h1>
+<p>作者这里用自己的研究型论文，题目为——<strong>Characteristics of
+Groundwater Drought and Its Correlation with Meteorological and
+Agricultural Drought over the North China Plain Based on
+GRACE</strong>，来逐一拆解Introduction的写作思路，以供大家参考。</p>
+<ul>
+<li><p><strong>研究背景、领域介绍</strong></p>
+<center>
+<p>-------------------------原文-------------------------</p>
+</center>
+<p><code>Groundwater, which exists in aquifers beneath the earth’ surface, is one of the most important freshwater resources in the world, providing as much as 50% of drinking water, 40% of industrial consumption, and 20% of agricultural irrigation (Zektser 2004, Wada 2016). However, when the groundwater system is short of the necessary recharge for a long time or the groundwater storage decreases sharply, groundwater droughts occur (Mishra et al. 2010, Thomas et al. 2017, Zhang et al. 2022). Compared with meteorological and agricultural drought, groundwater drought is a distinctive and novel type of drought, that is characterized by strong concealment, long duration, obvious hysteresis, and a wide range of effects (Hao et al. 2015, Sadeghfam et al. 2018, Han et al. 2019).</code></p>
+<center>
+<p>-------------------------翻译-------------------------</p>
+</center>
+<p><code>地下水是指存在于地球表面以下含水层中的水，是世界上重要的淡水资源之一，地球上约50%的饮用水、40%的工业用水和20%的农业用水消耗均来自地下水。当地下水系统在一定时间内补给减少或地下水储量迅速降低，地下水干旱就会发生。而相比于气象干旱和农业干旱，地下水干旱是一种独特的、新颖的干旱类型，具有隐蔽性强、持续时间长、明显滞后性和影响范围广的特点。</code></p></li>
+<li><p><strong>研究意义</strong></p>
+<center>
+<p>-------------------------原文-------------------------</p>
+</center>
+<p><code>Thus, groundwater drought is the main threat to water security, which could lead to a shortage of water supply, crop production reduction, and eco-environmental deterioration, particularly for regions that strongly depend on groundwater resources (Zhang et al. 2017, Zhu et al. 2022). Therefore, improving the monitoring and understanding of groundwater drought and its driving factors is significant for drought risk assessment, water resource planning and management, and sustainable ecological development (Belal et al. 2014, Ju et al. 2021, Shi et al. 2022, Zhang et al. 2022).</code></p>
+<center>
+<p>-------------------------翻译-------------------------</p>
+</center>
+<p><code>地下水干旱是地下水安全的主要威胁，其可能导致供水资源短缺、农作物减产以及生态环境退化等风险，尤其是哪些极度依赖地下水资源的地区。因此，提升对地下水干旱的监测和地下水干旱驱动因素的理解对于干旱风险评估、水资源规划和生态可持续发展具有重要意义。</code></p></li>
+<li><p><strong>国内外的研究进展</strong></p>
+<center>
+<p>-------------------------原文-------------------------</p>
+</center>
+<p><code>Some previous studies have begun to adopt various methods to monitor and characterize groundwater drought by developing drought indices based on in-site observed or model-simulated groundwater (Peters et al. 2006, Li et al. 2015, Mustafa et al. 2017). Bloomfield et al (2013) developed the standardized groundwater index (SGI) and evaluated groundwater drought in the UK using 14 relatively long, up to 103 yrs., groundwater level hydrographs. Wossenyeleh et al (2021) combined a groundwater flow state model with a threshold method to assess groundwater drought in a wetland ecosystem and its effect on groundwater discharge.</code></p>
+<center>
+<p>-------------------------翻译-------------------------</p>
+</center>
+<p><code>先前的研究利用原位监测或模型模拟的地下水数据开发干旱指数，同时结合不同的方法去监测和识别地下水干旱的特征。Bloomfield等人在2013年利用14口，长达103年的地下水水位观测数据，开发了SGI指数并且评价了英国地区的地下水干旱。Wossenyeleh等人在2021年利用地下水动力学模型结合阈值法评价了湿地生态系统的地下水干旱以及地下水干旱对它的影响。</code></p></li>
+<li><p><strong>国内外研究的不足</strong></p>
+<center>
+<p>-------------------------原文-------------------------</p>
+</center>
+<p><code>Nevertheless, the deficiency of groundwater observation stations, uneven spatial distribution, and discontinuous records has hindered our ability to directly monitor and evaluate groundwater drought (Zhu et al. 2022). Moreover, the simplification of complex hydrogeological conditions and physical parameters related to aquifers in groundwater simulations adds exceptional uncertainty to groundwater drought identification (Niu et al. 2007, Li et al. 2015).</code></p>
+<center>
+<p>-------------------------翻译-------------------------</p>
+</center>
+<p><code>然而，地下水观测站点缺失、空间分布不均匀以及不连续的记录阻碍了我们直接进行监测和评估地下水干旱。而且，地下水模型模拟过程中含水层相关的复杂的水文条件和物理参数的简单化给地下水干旱识别过程中带来了不确定性。</code></p></li>
+<li><p><strong>本研究的研究目的和内容</strong></p>
+<center>
+<p>-------------------------原文-------------------------</p>
+</center>
+<p><code>Considering the above limitations, the primary objectives of this study are: 1) to evaluate the temporal and spatial evolutionary characteristics of groundwater drought based on the new groundwater drought index; 2) to investigate the correlation and response characteristics between groundwater drought and meteorological, and agricultural drought; and 3) to quantitatively compare the contributions of different driving factors, especially the contributions of human activities to groundwater drought on the NCP.</code></p>
+<center>
+<p>-------------------------翻译-------------------------</p>
+</center>
+<p><code>考虑到上述研究内容的不足，这项研究的主要目的是:1) 基于一种新的地下水干旱指数评价地下水干旱的时空演变特征；2) 分析地下水干旱和气象干旱、农业干旱的相关性及其响应关系；3) 去定量的分析不同驱动因素，尤其是人类活动对地下水干旱的影响。</code></p></li>
+</ul>
+<h1 id="注意事项">注意事项</h1>
+<ul>
+<li>Introduction常见时态为过去式、现在时、现在完成时。过去式常用于介绍别人研究过程中所采用的方法，以及已经取得的发现。现在时多用于研究背景和研究意义的介绍。现在完成时，多用于介绍正在成为研究趋势的热点问题；</li>
+<li>根据大方向的研究背景和所研究的具体的问题，有针对性的提出研究目标和内容；</li>
+<li>在介绍他人工作时，要公正、客观；不可贬低别人的工作，夹杂主观情感；</li>
+<li>引用文章时，尽量引用近10年的文章；一些经典的，奠定你研究基础的，尽管是早期的，也可以适当引用；</li>
+<li>根据研究的创新点和重要性，有<strong>技巧</strong>的介绍目前的研究空白。</li>
+<li>引用的文章应该和你的研究问题密切相关。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Introduction/" rel="tag"># Introduction</a>
+              <a href="/tags/%E8%AE%BA%E6%96%87%E5%86%99%E4%BD%9C/" rel="tag"># 论文写作</a>
+              <a href="/tags/%E5%86%99%E4%BD%9C%E7%BB%93%E6%9E%84/" rel="tag"># 写作结构</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E7%90%83%E8%B0%90%E5%87%BD%E6%95%B0%E5%8F%AF%E8%A7%86%E5%8C%96.html" rel="prev" title="球谐函数(Spherical Harmonics)-近代数学中最著名的函数之一">
+      <i class="fa fa-chevron-left"></i> 球谐函数(Spherical Harmonics)-近代数学中最著名的函数之一
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/%E5%85%A8%E7%90%83%E8%A1%8C%E6%94%BF%E5%8C%BA%E5%88%92%E6%95%B0%E6%8D%AE%E4%B8%8B%E8%BD%BD.html" rel="next" title="全球行政区划（GAUL）数据介绍">
+      全球行政区划（GAUL）数据介绍 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction%E7%9A%84%E5%86%99%E4%BD%9C%E7%BB%93%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">Introduction的写作结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#introduction%E7%9A%84%E5%86%99%E4%BD%9C%E5%AE%9E%E4%BE%8B"><span class="nav-number">3.</span> <span class="nav-text">Introduction的写作实例</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">4.</span> <span class="nav-text">注意事项</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingping Liu"
+      src="/images/qingping_liu.jpg">
+  <p class="site-author-name" itemprop="name">Qingping Liu</p>
+  <div class="site-description" itemprop="description">涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Qingping-Liu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Qingping-Liu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/qingpingliu9" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;qingpingliu9" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/QingpingLiu@mail.bnu.edu.cn" title="E-Mail → QingpingLiu@mail.bnu.edu.cn"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/28468952" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;28468952" rel="noopener" target="_blank"><i class="fa fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/28468952" title="Youtube → https:&#x2F;&#x2F;space.bilibili.com&#x2F;28468952" rel="noopener" target="_blank"><i class="fa fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingping Liu</span>
+</div>
+  <div class="powered-by">
+
+    <!--<a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+    -->地址: <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">北京师范大学</a>新街口外大街19号        邮编：100875
+    
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>

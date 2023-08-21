@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next1.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next1.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next1.png">
+  <link rel="mask-icon" href="/images/logo1.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-center-circle.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Mist","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="前言 Introduction Pyshp库是处理shapefile文件常用的第三方库，可以读取和写入shapefile文件。其中，shapefile文件是Eris公司于上世纪90年代初提出的一种矢量图形格式，用于存储具有地理空间特征的信息。Pyshp库内置了Shapefile类、ShapeRecords类、Reader类和Writer类,主要用来处理shapefile格式文件。  # Py">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何基于pyshp读取和写入shp文件">
+<meta property="og:url" content="http://example.com/%E8%AF%BB%E5%8F%96%E6%88%96%E6%96%B0%E5%BB%BAshp%E6%96%87%E4%BB%B6.html">
+<meta property="og:site_name" content="BNU-LQP">
+<meta property="og:description" content="前言 Introduction Pyshp库是处理shapefile文件常用的第三方库，可以读取和写入shapefile文件。其中，shapefile文件是Eris公司于上世纪90年代初提出的一种矢量图形格式，用于存储具有地理空间特征的信息。Pyshp库内置了Shapefile类、ShapeRecords类、Reader类和Writer类,主要用来处理shapefile格式文件。  # Py">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230821232533.png">
+<meta property="article:published_time" content="2023-08-21T14:30:00.000Z">
+<meta property="article:modified_time" content="2023-08-21T15:26:05.664Z">
+<meta property="article:author" content="Qingping Liu">
+<meta property="article:tag" content="Pyshp">
+<meta property="article:tag" content="Shapefile">
+<meta property="article:tag" content="地理空间库">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230821232533.png">
+
+<link rel="canonical" href="http://example.com/%E8%AF%BB%E5%8F%96%E6%88%96%E6%96%B0%E5%BB%BAshp%E6%96%87%E4%BB%B6.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>如何基于pyshp读取和写入shp文件 | BNU-LQP</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style></head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">BNU-LQP</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">文档</a>
+
+  </li>
+        <li class="menu-item menu-item-academy">
+
+    <a href="/academy/" rel="section">学术前沿</a>
+
+  </li>
+        <li class="menu-item menu-item-datanavi">
+
+    <a href="/dataNavi/" rel="section">数据导航</a>
+
+  </li>
+        <li class="menu-item menu-item-campus">
+
+    <a href="/campus/" rel="section">校园生活</a>
+
+  </li>
+        <li class="menu-item menu-item-resume">
+
+    <a href="/resume/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/Qingping-Liu" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/%E8%AF%BB%E5%8F%96%E6%88%96%E6%96%B0%E5%BB%BAshp%E6%96%87%E4%BB%B6.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/qingping_liu.jpg">
+      <meta itemprop="name" content="Qingping Liu">
+      <meta itemprop="description" content="涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="BNU-LQP">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何基于pyshp读取和写入shp文件
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-08-21 22:30:00 / 修改时间：23:26:05" itemprop="dateCreated datePublished" datetime="2023-08-21T22:30:00+08:00">2023-08-21</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前言-introduction">前言 Introduction</h1>
+<p><strong><font color="blue">Pyshp库</font></strong>是处理shapefile文件常用的第三方库，可以读取和写入shapefile文件。其中，shapefile文件是Eris公司于上世纪90年代初提出的一种矢量图形格式，用于存储具有地理空间特征的信息。Pyshp库内置了Shapefile类、ShapeRecords类、Reader类和Writer类,主要用来处理shapefile格式文件。</p>
+<p><img src="https://cdn.staticaly.com/gh/Qingping-Liu/blog_img@main/img/20230821232533.png">
+# Pyshp的安装及基本使用</p>
+<h2 id="pyshp库的安装">Pyshp库的安装</h2>
+<p>使用pyshp库，首先需要将其安装到Python环境中。这可以通过pip命令轻松实现，在终端中输入以下命令即可安装：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; pip install pyshp</span><br></pre></td></tr></table></figure>
+<h2 id="pyshp库的基本使用">Pyshp库的基本使用</h2>
+<p>使用pyshp库读取shapefile文件格式，需要使用pyshp内置的Shapefile类中的<code>Reader()</code>方法，其文件读取方法如下：</p>
+<ol type="1">
+<li>导入pyshp库</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import shapefile</span><br></pre></td></tr></table></figure>
+<ol start="2" type="1">
+<li>打开shapefile文件</li>
+</ol>
+<p>在读入shapefile文件过程中，注意文件的编码方式，常用的文件编码方式为：<font color="red">gbk、utf-8、GB2312和Unicode</font>等。
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; shp = shapefile.Reader('example.shp', encoding="UTF-8")</span><br></pre></td></tr></table></figure></p>
+<ol start="3" type="1">
+<li>读取shapefile文件中的数据</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; shape_recs = shp.shapeRecords() # 获取所有的要素及其对应的属性</span><br><span class="line">&gt;&gt;&gt; for shape_rec in shape_recs:</span><br><span class="line">&gt;&gt;&gt;    shp_bound = shape_rec.shape # 返回子要素的几何信息</span><br><span class="line">&gt;&gt;&gt;    record = shape_rec.record   # 返回子要素的属性特征</span><br><span class="line">&gt;&gt;&gt; print(shp)</span><br><span class="line">shapefile Reader</span><br><span class="line">    663 shapes (type 'POLYGON')</span><br><span class="line">    663 records (44 fields)</span><br></pre></td></tr></table></figure>
+<p>也可以从压缩文件或矢量文件的URL进行读取：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; # from a zipped shapefile on website</span><br><span class="line">&gt;&gt;&gt; sf = shapefile.Reader("https://biogeo.ucdavis.edu/data/diva/rrd/NIC_rrd.zip")</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; # from a shapefile collection of files in a github repository</span><br><span class="line">&gt;&gt;&gt; sf = shapefile.Reader("https://github.com/nvkelso/natural-earth-vector/blob/master/110m_cultural/ne_110m_admin_0_tiny_countries.shp?raw=true")</span><br></pre></td></tr></table></figure>
+<ol start="4" type="1">
+<li>读取shapefile的元数据</li>
+</ol>
+<p>shapefile有多种要素类型，其信息保存在dbf文件中：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; sf = shapefile.Reader("shapefiles/blockgroups.dbf")</span><br><span class="line">&gt;&gt;&gt; sf.shapeType</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+<p>编号对应的形状类型如下，需注意的是编号并不是连续的，有几个尚未使用的保留编号。
+- 空=0 - 点 = 1 - 折线 = 3 - 多边形 = 5 - 多点 = 8 - 点 = 11 - 折线Z =
+13 - 多边形 = 15 - 多点 = 18 - 点TM = 21 - 折线 = 23 - 多边形 = 25 -
+多点 = 28 - 多面片 = 31 -
+shape类型在shapefile模块中也被定义为常量，以便我们可以更直观地比较类型：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; sf.shapeType == shapefile.POLYGON</span><br><span class="line">True</span><br><span class="line"># 或者简单的方式</span><br><span class="line">&gt;&gt;&gt; sf.shapeTypeName == 'POLYGON'</span><br><span class="line">True</span><br></pre></td></tr></table></figure>
+<ol start="5" type="1">
+<li>shapefile的角标</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; len(sf)</span><br><span class="line">663</span><br><span class="line">&gt;&gt;&gt; sf.bbox</span><br><span class="line">[-122.515048, 37.652916, -122.327622, 37.863433]    # 外接矩形的角标</span><br></pre></td></tr></table></figure>
+<ol start="6" type="1">
+<li>属性表信息</li>
+</ol>
+<p>要查看Reader对象的属性表和字段信息，可以调用“fields”属性：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; fields = sf.fields</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; assert fields == [("DeletionFlag", "C", 1, 0), ["AREA", "N", 18, 5],</span><br><span class="line">... ["BKG_KEY", "C", 12, 0], ["POP1990", "N", 9, 0], ["POP90_SQMI", "N", 10, 1],</span><br><span class="line">... ["HOUSEHOLDS", "N", 9, 0],</span><br><span class="line">... ["MALES", "N", 9, 0], ["FEMALES", "N", 9, 0], ["WHITE", "N", 9, 0],</span><br><span class="line">... ["BLACK", "N", 8, 0], ["AMERI_ES", "N", 7, 0], ["ASIAN_PI", "N", 8, 0],</span><br><span class="line">... ["OTHER", "N", 8, 0], ["HISPANIC", "N", 8, 0], ["AGE_UNDER5", "N", 8, 0],</span><br><span class="line">... ["AGE_5_17", "N", 8, 0], ["AGE_18_29", "N", 8, 0], ["AGE_30_49", "N", 8, 0],</span><br><span class="line">... ["AGE_50_64", "N", 8, 0], ["AGE_65_UP", "N", 8, 0],</span><br><span class="line">... ["NEVERMARRY", "N", 8, 0], ["MARRIED", "N", 9, 0], ["SEPARATED", "N", 7, 0],</span><br><span class="line">... ["WIDOWED", "N", 8, 0], ["DIVORCED", "N", 8, 0], ["HSEHLD_1_M", "N", 8, 0],</span><br><span class="line">... ["HSEHLD_1_F", "N", 8, 0], ["MARHH_CHD", "N", 8, 0],</span><br><span class="line">... ["MARHH_NO_C", "N", 8, 0], ["MHH_CHILD", "N", 7, 0],</span><br><span class="line">... ["FHH_CHILD", "N", 7, 0], ["HSE_UNITS", "N", 9, 0], ["VACANT", "N", 7, 0],</span><br><span class="line">... ["OWNER_OCC", "N", 8, 0], ["RENTER_OCC", "N", 8, 0],</span><br><span class="line">... ["MEDIAN_VAL", "N", 7, 0], ["MEDIANRENT", "N", 4, 0],</span><br><span class="line">... ["UNITS_1DET", "N", 8, 0], ["UNITS_1ATT", "N", 7, 0], ["UNITS2", "N", 7, 0],</span><br><span class="line">... ["UNITS3_9", "N", 8, 0], ["UNITS10_49", "N", 8, 0],</span><br><span class="line">... ["UNITS50_UP", "N", 8, 0], ["MOBILEHOME", "N", 7, 0]]</span><br></pre></td></tr></table></figure>
+<p>shapefile的第一个字段往往是索引或者不实用的字段，在多数情况下，都忽略第一个字段，以下为获取所有字段名的列表或属性表：
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># 字段列表</span><br><span class="line">&gt;&gt;&gt; fieldnames = [f[0] for f in sf.fields[1:]]</span><br><span class="line"># 属性表</span><br><span class="line">&gt;&gt;&gt; records = sf.records()</span><br><span class="line">&gt;&gt;&gt; len(records)</span><br><span class="line">663</span><br></pre></td></tr></table></figure></p>
+<ol start="7" type="1">
+<li>新建shapefile文件</li>
+</ol>
+<p>创建 shapefile，首先启动一个新的 Writer
+实例，向其传递要保存到的文件路径和名称，并新建一个字段： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; w = shapefile.Writer('shapefiles/test/testfile')</span><br><span class="line">&gt;&gt;&gt; w.field('field1', 'C')</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+类似 python 文件的对象读取 shapefile 一样，也可以向它们写入：
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; try:</span><br><span class="line">...     from StringIO import StringIO</span><br><span class="line">... except ImportError:</span><br><span class="line">...     from io import BytesIO as StringIO</span><br><span class="line">&gt;&gt;&gt; shp = StringIO()</span><br><span class="line">&gt;&gt;&gt; shx = StringIO()</span><br><span class="line">&gt;&gt;&gt; dbf = StringIO()</span><br><span class="line">&gt;&gt;&gt; w = shapefile.Writer(shp=shp, shx=shx, dbf=dbf)</span><br><span class="line">&gt;&gt;&gt; w.field('field1', 'C')</span><br><span class="line">&gt;&gt;&gt; w.record()</span><br><span class="line">&gt;&gt;&gt; w.null()</span><br><span class="line">&gt;&gt;&gt; w.close()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; # To read back the files you could call the "StringIO.getvalue()" method later.</span><br><span class="line">&gt;&gt;&gt; assert shp.getvalue()</span><br><span class="line">&gt;&gt;&gt; assert shx.getvalue()</span><br><span class="line">&gt;&gt;&gt; assert dbf.getvalue()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; # In fact, you can read directly from them using the Reader</span><br><span class="line">&gt;&gt;&gt; r = shapefile.Reader(shp=shp, shx=shx, dbf=dbf)</span><br><span class="line">&gt;&gt;&gt; len(r)</span><br><span class="line">1</span><br><span class="line"></span><br></pre></td></tr></table></figure></p>
+<ol start="8" type="1">
+<li>添加属性表中的记录</li>
+</ol>
+<p>在添加记录之前，必须首先创建字段来定义每个属性中将包含哪些类型的值。有多种不同的字段类型，所有这些类型都支持将
+None 值存储为
+NULL。文本字段是使用“C”类型创建的，第三个“size”参数可以自定义为文本值的预期长度以节省空间：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; w = shapefile.Writer('shapefiles/test/dtype')</span><br><span class="line">&gt;&gt;&gt; w.field('TEXT', 'C')</span><br><span class="line">&gt;&gt;&gt; w.field('SHORT_TEXT', 'C', size=5)</span><br><span class="line">&gt;&gt;&gt; w.field('LONG_TEXT', 'C', size=250)</span><br><span class="line">&gt;&gt;&gt; w.null()</span><br><span class="line">&gt;&gt;&gt; w.record('Hello', 'World', 'World'*50)</span><br><span class="line">&gt;&gt;&gt; w.close()</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; r = shapefile.Reader('shapefiles/test/dtype')</span><br><span class="line">&gt;&gt;&gt; assert r.record(0) == ['Hello', 'World', 'World'*50]</span><br></pre></td></tr></table></figure>
+<ol start="9" type="1">
+<li><p>添加多边形要素 与 LineString
+类似，多边形形状由多个多边形组成，并且必须以多边形列表的形式给出。主要区别在于多边形必须至少有
+4 个点，并且最后一个点必须与第一个点相同。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; w = shapefile.Writer('shapefiles/test/polygon')</span><br><span class="line">&gt;&gt;&gt; w.field('name', 'C')</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; w.poly([</span><br><span class="line">...	        [[113,24], [112,32], [117,36], [122,37], [118,20]], # poly 1</span><br><span class="line">...	        [[116,29],[116,26],[119,29],[119,32]], # hole 1</span><br><span class="line">...         [[15,2], [17,6], [22,7]]  # poly 2</span><br><span class="line">...        ])</span><br><span class="line">&gt;&gt;&gt; w.record('polygon1')</span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt; w.close()</span><br></pre></td></tr></table></figure></p></li>
+<li><p>写入投影信息</p></li>
+</ol>
+<p>.prj 文件或投影文件是一个简单的文本文件，它存储 shapefile
+的地图投影和坐标参考系统，以帮助在地图上正确定位几何图形。以下用WGS84的投影坐标系作为案例，更多的投影信息可以上网站上查找。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; with open("{}.prj".format(filename), "w") as prj:</span><br><span class="line">&gt;&gt;&gt;     wkt = 'GEOGCS["WGS 84",'</span><br><span class="line">&gt;&gt;&gt;     wkt += 'DATUM["WGS_1984",'</span><br><span class="line">&gt;&gt;&gt;     wkt += 'SPHEROID["WGS 84",6378137,298.257223563]]'</span><br><span class="line">&gt;&gt;&gt;     wkt += ',PRIMEM["Greenwich",0],'</span><br><span class="line">&gt;&gt;&gt;     wkt += 'UNIT["degree",0.0174532925199433]]'</span><br><span class="line">&gt;&gt;&gt;     prj.write(wkt)</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Pyshp/" rel="tag"># Pyshp</a>
+              <a href="/tags/Shapefile/" rel="tag"># Shapefile</a>
+              <a href="/tags/%E5%9C%B0%E7%90%86%E7%A9%BA%E9%97%B4%E5%BA%93/" rel="tag"># 地理空间库</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/%E5%A6%82%E4%BD%95%E5%88%A9%E7%94%A8%E5%B0%81%E8%A3%85Tkinter%E7%A8%8B%E5%BA%8F%E4%B8%BAexe.html" rel="prev" title="如何将Python的GUI程序封装为exe">
+      <i class="fa fa-chevron-left"></i> 如何将Python的GUI程序封装为exe
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80-introduction"><span class="nav-number">1.</span> <span class="nav-text">前言 Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pyshp%E5%BA%93%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-number">1.1.</span> <span class="nav-text">Pyshp库的安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#pyshp%E5%BA%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8"><span class="nav-number">1.2.</span> <span class="nav-text">Pyshp库的基本使用</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Qingping Liu"
+      src="/images/qingping_liu.jpg">
+  <p class="site-author-name" itemprop="name">Qingping Liu</p>
+  <div class="site-description" itemprop="description">涵盖专业知识图谱，生态水文科学前沿，气象水文数据汇聚，遥感卫星反演， 日常工作学习总结等</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">23</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">56</span>
+        <span class="site-state-item-name">标签</span>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Qingping-Liu" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Qingping-Liu" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://twitter.com/qingpingliu9" title="Twitter → https:&#x2F;&#x2F;twitter.com&#x2F;qingpingliu9" rel="noopener" target="_blank"><i class="fab fa-twitter fa-fw"></i>Twitter</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/QingpingLiu@mail.bnu.edu.cn" title="E-Mail → QingpingLiu@mail.bnu.edu.cn"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/28468952" title="Bilibili → https:&#x2F;&#x2F;space.bilibili.com&#x2F;28468952" rel="noopener" target="_blank"><i class="fa fa-bilibili fa-fw"></i>Bilibili</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://space.bilibili.com/28468952" title="Youtube → https:&#x2F;&#x2F;space.bilibili.com&#x2F;28468952" rel="noopener" target="_blank"><i class="fa fa-youtube fa-fw"></i>Youtube</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Qingping Liu</span>
+</div>
+  <div class="powered-by">
+
+    <!--<a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://mist.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a>
+    -->地址: <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">北京师范大学</a>新街口外大街19号        邮编：100875
+    
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script size="300" alpha="0.6" zIndex="-1" src="/lib/canvas-ribbon/canvas-ribbon.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+  <script defer src="/lib/three/three.min.js"></script>
+    <script defer src="/lib/three/three-waves.min.js"></script>
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+<script>
+document.querySelectorAll('.pdfobject-container').forEach(element => {
+  let url = element.dataset.target;
+  let pdfOpenParams = {
+    navpanes : 0,
+    toolbar  : 0,
+    statusbar: 0,
+    pagemode : 'thumbs',
+    view     : 'FitH'
+  };
+  let pdfOpenFragment = '#' + Object.entries(pdfOpenParams).map(([key, value]) => `${key}=${encodeURIComponent(value)}`).join('&');
+  let fullURL = `/lib/pdf/web/viewer.html?file=${encodeURIComponent(url)}${pdfOpenFragment}`;
+
+  if (NexT.utils.supportsPDFs()) {
+    element.innerHTML = `<embed class="pdfobject" src="${url + pdfOpenFragment}" type="application/pdf" style="height: ${element.dataset.height};">`;
+  } else {
+    element.innerHTML = `<iframe src="${fullURL}" style="height: ${element.dataset.height};" frameborder="0"></iframe>`;
+  }
+});
+</script>
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
